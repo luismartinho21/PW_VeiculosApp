@@ -8,7 +8,7 @@ Aplicação web informativa sobre marcas e veículos motorizados de três meios 
 O projeto foi desenvolvido segundo a arquitetura **Model-View-Controller (MVC)** em PHP com **Programação Orientada a Objetos (POO)** e ligação a **MySQL** via driver **MySQLi**.
 
 ## Autores do Projeto
-- **Luís Martinho** ([@luismartinho21](https://github.com/luismartinho21))
+- **Luís Martinho** ([@luismartinho21](https://github.com/luismartinho21) &bull; [lumar.email](https://lumar.email))
 - **Eduardo Oliveira** ([@eduoliveira31](https://github.com/eduoliveira31))
 - **Gonçalo Laurindo** ([@laurindogoncalo](https://github.com/laurindogoncalo))
 
