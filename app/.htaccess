@@ -1,0 +1,2 @@
+# Impede o acesso direto às pastas do sistema
+Options -Indexes

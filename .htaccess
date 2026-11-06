@@ -1,0 +1,8 @@
+# Ativação do mecanismo de reescrita (mod_rewrite)
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Encaminha todos os pedidos virtuais para o Front Controller (index.php)
+RewriteRule . index.php [L]

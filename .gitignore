@@ -1,0 +1,15 @@
+# Dependências e ficheiros do SO
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs e temporários
+*.log
+tmp/
+cache/
+
+# IDE e ferramentas
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
