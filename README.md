@@ -7,6 +7,13 @@ Trabalho Prático #1 de **Programação Web** (3º Ano - 1º Semestre)
 Aplicação web informativa sobre marcas e veículos motorizados de três meios fundamentais: **Terrestre**, **Aéreo** e **Marítimo**.
 O projeto foi desenvolvido segundo a arquitetura **Model-View-Controller (MVC)** em PHP com **Programação Orientada a Objetos (POO)** e ligação a **MySQL** via driver **MySQLi**.
 
+## Autores do Projeto
+- **Luís Martinho** ([@luismartinho21](https://github.com/luismartinho21))
+- **Eduardo Oliveira** ([@eduoliveira31](https://github.com/eduoliveira31))
+- **Gonçalo Laurindo** ([@laurindogoncalo](https://github.com/laurindogoncalo))
+
+*Curso de Engenharia de Computação Gráfica e Multimédia (ECGM) - IPVC*
+
 ## Funcionalidades
 - CRUD completo (Create, Read, Update, Delete) de veículos motorizados;
 - Associação relacional entre veículos e as suas categorias (Terrestre, Aéreo, Marítimo);
