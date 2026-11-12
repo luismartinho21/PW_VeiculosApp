@@ -29,10 +29,59 @@ if (isset($data['info']) && isset($data['type'])) {
 
 <?php if (empty($data['veiculos'])) { ?>
   <p class="empty-state">Ainda não existem veículos no catálogo.</p>
-<?php } else { ?>
-  <ul class="vehicle-grid">
-    <?php foreach ($data['veiculos'] as $veiculo) { ?>
-      <li class="vehicle-card">
+<?php } else {
+  // Extrai automaticamente as categorias existentes nos veículos
+  $categoriasDisponiveis = [];
+  foreach ($data['veiculos'] as $v) {
+    if (!empty($v['categoria']) && !in_array($v['categoria'], $categoriasDisponiveis, true)) {
+      $categoriasDisponiveis[] = $v['categoria'];
+    }
+  }
+  sort($categoriasDisponiveis);
+?>
+  <section class="filter-bar" aria-label="Filtrar veículos">
+    <div class="filter-group filter-search">
+      <label for="search-veiculos" class="sr-only">Pesquisar veículos</label>
+      <input
+        type="search"
+        id="search-veiculos"
+        placeholder="Pesquisar por marca, país ou ano..."
+        autocomplete="off"
+      >
+    </div>
+
+    <div class="filter-group filter-category">
+      <label for="filter-categoria" class="sr-only">Filtrar por categoria</label>
+      <select id="filter-categoria">
+        <option value="">Todas as categorias</option>
+        <?php foreach ($categoriasDisponiveis as $catNome) { ?>
+          <option value="<?php echo htmlspecialchars(mb_strtolower($catNome, 'UTF-8')); ?>">
+            <?php echo htmlspecialchars($catNome); ?>
+          </option>
+        <?php } ?>
+      </select>
+    </div>
+
+    <button type="button" id="clear-filters" class="button-secondary" hidden>Limpar filtros</button>
+  </section>
+
+  <p id="results-counter" class="results-counter" aria-live="polite">
+    A mostrar <?php echo count($data['veiculos']); ?> veículo(s)
+  </p>
+
+  <ul class="vehicle-grid" id="vehicle-grid">
+    <?php foreach ($data['veiculos'] as $veiculo) {
+      $searchText = mb_strtolower(
+        $veiculo['marca'] . ' ' . $veiculo['pais_origem'] . ' ' . $veiculo['ano_fundacao'] . ' ' . $veiculo['categoria'],
+        'UTF-8'
+      );
+      $categoriaValue = mb_strtolower($veiculo['categoria'], 'UTF-8');
+    ?>
+      <li
+        class="vehicle-card"
+        data-search="<?php echo htmlspecialchars($searchText); ?>"
+        data-categoria="<?php echo htmlspecialchars($categoriaValue); ?>"
+      >
         <div class="vehicle-card-content">
           <p class="eyebrow"><?php echo htmlspecialchars($veiculo['categoria']); ?></p>
           <h2><?php echo htmlspecialchars($veiculo['marca']); ?></h2>
@@ -46,5 +95,10 @@ if (isset($data['info']) && isset($data['type'])) {
       </li>
     <?php } ?>
   </ul>
+
+  <div id="no-results-message" class="empty-state" hidden>
+    <p>Nenhum veículo encontrado com os filtros aplicados.</p>
+    <button type="button" id="reset-empty-filters" class="button-secondary">Mostrar todos os veículos</button>
+  </div>
 <?php } ?>
 <?php require 'app/views/layout/footer.php'; ?>
