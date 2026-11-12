@@ -7,7 +7,13 @@ require 'app/views/layout/header.php';
     <p class="eyebrow">Catálogo</p>
     <h1>Lista de Veículos</h1>
   </div>
-  <a class="button" href="<?php echo $url_alias; ?>/veiculo/create">Adicionar veículo</a>
+  <a class="button with-icon" href="<?php echo $url_alias; ?>/veiculo/create">
+    <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 12h14"/>
+      <path d="M12 5v14"/>
+    </svg>
+    <span>Adicionar veículo</span>
+  </a>
 </section>
 
 <?php
@@ -30,7 +36,6 @@ if (isset($data['info']) && isset($data['type'])) {
 <?php if (empty($data['veiculos'])) { ?>
   <p class="empty-state">Ainda não existem veículos no catálogo.</p>
 <?php } else {
-  // Extrai automaticamente as categorias existentes nos veículos
   $categoriasDisponiveis = [];
   foreach ($data['veiculos'] as $v) {
     if (!empty($v['categoria']) && !in_array($v['categoria'], $categoriasDisponiveis, true)) {
@@ -62,7 +67,13 @@ if (isset($data['info']) && isset($data['type'])) {
       </select>
     </div>
 
-    <button type="button" id="clear-filters" class="button-secondary" hidden>Limpar filtros</button>
+    <button type="button" id="clear-filters" class="button-secondary with-icon" hidden>
+      <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 6 6 18"/>
+        <path d="m6 6 12 12"/>
+      </svg>
+      <span>Limpar filtros</span>
+    </button>
   </section>
 
   <p id="results-counter" class="results-counter" aria-live="polite">
@@ -88,9 +99,30 @@ if (isset($data['info']) && isset($data['type'])) {
           <p><?php echo htmlspecialchars($veiculo['pais_origem']); ?> <span aria-hidden="true">·</span> <?php echo htmlspecialchars($veiculo['ano_fundacao']); ?></p>
         </div>
         <div class="card-actions">
-          <a href="<?php echo $url_alias; ?>/veiculo/get/<?php echo $veiculo['id']; ?>">Detalhes</a>
-          <a href="<?php echo $url_alias; ?>/veiculo/update/<?php echo $veiculo['id']; ?>">Editar</a>
-          <a class="delete-link" href="<?php echo $url_alias; ?>/veiculo/delete/<?php echo $veiculo['id']; ?>" data-confirm="Tens a certeza de que pretendes eliminar este veículo?">Eliminar</a>
+          <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/get/<?php echo $veiculo['id']; ?>">
+            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>Detalhes</span>
+          </a>
+
+          <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/update/<?php echo $veiculo['id']; ?>">
+            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+              <path d="m15 5 4 4"/>
+            </svg>
+            <span>Editar</span>
+          </a>
+
+          <a class="action-link delete-link with-icon" href="<?php echo $url_alias; ?>/veiculo/delete/<?php echo $veiculo['id']; ?>" data-confirm="Tens a certeza de que pretendes eliminar este veículo?">
+            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 6h18"/>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+            </svg>
+            <span>Eliminar</span>
+          </a>
         </div>
       </li>
     <?php } ?>
