@@ -1,26 +1,14 @@
-<!doctype html>
-<html lang="pt">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Vehicles App</title>
-  </head>
-  <body>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col">
-          <h1>Veículos ECGM</h1>
-          <a href="<?php echo $url_alias;?>/veiculo">Lista de veículos</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  </body>
-</html>
+<?php
+$pageTitle = 'Início | Gestão de Veículos';
+require 'app/views/layout/header.php';
+?>
+<section class="hero">
+  <p class="eyebrow">Catálogo automóvel</p>
+  <h1>Veículos ECGM</h1>
+  <p>Explore e gira o catálogo de veículos num só lugar.</p>
+  <div class="hero-actions">
+    <a class="button" href="<?php echo $url_alias; ?>/veiculo">Ver veículos</a>
+    <a class="button button-secondary" href="<?php echo $url_alias; ?>/veiculo/create">Adicionar veículo</a>
+  </div>
+</section>
+<?php require 'app/views/layout/footer.php'; ?>
