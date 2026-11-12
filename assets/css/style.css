@@ -609,3 +609,82 @@ dd {
 .card-actions .action-link:hover .ui-icon {
   transform: translateY(-1px);
 }
+
+/* --- Ponto 2: Badges Coloridas, Ilustração de Topo e Elevação dos Cartões --- */
+.vehicle-card {
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.14);
+  border-color: rgba(22, 101, 91, 0.28);
+}
+
+.vehicle-card-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem;
+  margin: -1.5rem -1.5rem 1.15rem -1.5rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.vehicle-card-banner svg {
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.9;
+  transition: transform 0.25s ease;
+}
+
+.vehicle-card:hover .vehicle-card-banner svg {
+  transform: scale(1.08);
+}
+
+/* Temas visuais por categoria */
+.vehicle-card-banner.theme-terrestre,
+.vehicle-card-banner.theme-default {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #15803d;
+}
+
+.vehicle-card-banner.theme-maritimo {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #1d4ed8;
+}
+
+.vehicle-card-banner.theme-aereo {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  color: #0369a1;
+}
+
+/* Badges (Etiquetas) */
+.category-badge {
+  display: inline-block;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+
+.badge-terrestre,
+.badge-default {
+  background-color: #ffffff;
+  color: #15803d;
+  border: 1px solid rgba(21, 128, 61, 0.25);
+}
+
+.badge-maritimo {
+  background-color: #ffffff;
+  color: #1d4ed8;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+}
+
+.badge-aereo {
+  background-color: #ffffff;
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.25);
+}
