@@ -12,6 +12,11 @@ if ($relativePath === '//') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle ?? 'Gestão de Veículos', ENT_QUOTES, 'UTF-8'); ?></title>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
     <link rel="stylesheet" href="<?php echo $url_alias; ?>/assets/css/style.css">
 </head>
 <body>
@@ -70,6 +75,16 @@ if ($relativePath === '//') {
                     </svg>
                     <span>Autores</span>
                 </a>
+
+                <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar modo escuro" title="Alternar tema Claro/Escuro">
+                    <svg class="ui-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                    </svg>
+                    <svg class="ui-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                </button>
             </nav>
         </div>
     </header>

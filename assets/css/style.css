@@ -688,3 +688,263 @@ dd {
   color: #0369a1;
   border: 1px solid rgba(3, 105, 161, 0.25);
 }
+
+/* --- Ponto 3: Modal de Confirmação, Toasts, Validação e Dark Mode --- */
+.modal-backdrop[hidden] {
+  display: none !important;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.18s ease;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 1.75rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.25);
+  text-align: center;
+}
+
+.modal-icon-danger {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.modal-icon-danger svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.modal-box h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.modal-box p {
+  margin: 0 0 1.5rem 0;
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.modal-actions > * {
+  flex: 1;
+  text-align: center;
+}
+
+.button-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button-danger:hover {
+  background-color: #b91c1c;
+}
+
+/* Toasts / Alertas com botão de fecho */
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notice.is-hiding {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.notice-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.65;
+  padding: 0 0.25rem;
+}
+
+.notice-close:hover {
+  opacity: 1;
+}
+
+/* Validação visual nos formulários */
+input.is-invalid,
+select.is-invalid {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+}
+
+input.is-valid,
+select.is-valid {
+  border-color: #16a34a !important;
+}
+
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #dc2626;
+}
+
+/* Botão Tema Claro/Escuro */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgba(22, 101, 91, 0.08);
+  color: #16655b;
+}
+
+.theme-toggle-btn .icon-sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle-btn .icon-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle-btn .icon-sun {
+  display: block;
+  color: #fbbf24;
+}
+
+/* --- Tema Escuro (Dark Mode) --- */
+html[data-theme="dark"] body {
+  background-color: #0b1120;
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .site-header,
+html[data-theme="dark"] .site-footer {
+  background-color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.15);
+}
+
+html[data-theme="dark"] .brand,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3 {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .navbar .nav-link {
+  color: #cbd5e1;
+}
+
+html[data-theme="dark"] .navbar .nav-link:hover,
+html[data-theme="dark"] .navbar .nav-link.is-active {
+  background-color: rgba(45, 212, 191, 0.14);
+  color: #5eead4;
+}
+
+html[data-theme="dark"] .theme-toggle-btn {
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+html[data-theme="dark"] .vehicle-card,
+html[data-theme="dark"] .filter-bar,
+html[data-theme="dark"] .notice,
+html[data-theme="dark"] .modal-box,
+html[data-theme="dark"] form {
+  background-color: #1e293b;
+  border-color: rgba(148, 163, 184, 0.16);
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .vehicle-card-content p,
+html[data-theme="dark"] .results-counter,
+html[data-theme="dark"] .modal-box p,
+html[data-theme="dark"] .site-footer p {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .card-actions {
+  border-top-color: rgba(148, 163, 184, 0.14);
+}
+
+html[data-theme="dark"] .filter-bar input[type="search"],
+html[data-theme="dark"] .filter-bar select,
+html[data-theme="dark"] form input,
+html[data-theme="dark"] form select {
+  background-color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.25);
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .vehicle-card-banner.theme-terrestre,
+html[data-theme="dark"] .vehicle-card-banner.theme-default {
+  background: linear-gradient(135deg, rgba(21, 128, 61, 0.25) 0%, rgba(22, 101, 52, 0.35) 100%);
+  color: #86efac;
+}
+
+html[data-theme="dark"] .vehicle-card-banner.theme-maritimo {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.25) 0%, rgba(30, 64, 175, 0.35) 100%);
+  color: #93c5fd;
+}
+
+html[data-theme="dark"] .vehicle-card-banner.theme-aereo {
+  background: linear-gradient(135deg, rgba(3, 105, 161, 0.25) 0%, rgba(7, 89, 133, 0.35) 100%);
+  color: #7dd3fc;
+}
+
+html[data-theme="dark"] .category-badge {
+  background-color: rgba(15, 23, 42, 0.75);
+  color: inherit;
+  border-color: currentColor;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
