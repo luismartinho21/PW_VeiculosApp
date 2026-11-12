@@ -5,6 +5,7 @@ $relativePath = '/' . ltrim(substr($currentUri, strlen($basePath)), '/');
 if ($relativePath === '//') {
     $relativePath = '/';
 }
+$loggedUser = $_SESSION['user'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -57,14 +58,43 @@ if ($relativePath === '//') {
                     <span>Veículos</span>
                 </a>
 
-                <a class="nav-link with-icon<?php echo str_starts_with($relativePath, '/veiculo/create') ? ' is-active' : ''; ?>" href="<?php echo $url_alias; ?>/veiculo/create">
-                    <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M8 12h8"/>
-                        <path d="M12 8v8"/>
-                    </svg>
-                    <span>Adicionar Veículo</span>
-                </a>
+                <?php if ($loggedUser) { ?>
+                    <a class="nav-link with-icon<?php echo str_starts_with($relativePath, '/veiculo/create') ? ' is-active' : ''; ?>" href="<?php echo $url_alias; ?>/veiculo/create">
+                        <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12h8"/>
+                            <path d="M12 8v8"/>
+                        </svg>
+                        <span>Adicionar</span>
+                    </a>
+                <?php } ?>
+
+                <?php if ($loggedUser) { ?>
+                    <span class="user-pill" title="<?php echo htmlspecialchars($loggedUser['email']); ?>">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <span><?php echo htmlspecialchars($loggedUser['nome']); ?></span>
+                    </span>
+                    <a class="nav-link logout-link with-icon" href="<?php echo $url_alias; ?>/auth/logout">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" x2="9" y1="12" y2="12"/>
+                        </svg>
+                        <span>Sair</span>
+                    </a>
+                <?php } else { ?>
+                    <a class="nav-link with-icon<?php echo str_starts_with($relativePath, '/auth/login') ? ' is-active' : ''; ?>" href="<?php echo $url_alias; ?>/auth/login">
+                        <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10 17 15 12 10 7"/>
+                            <line x1="15" x2="3" y1="12" y2="12"/>
+                        </svg>
+                        <span>Entrar</span>
+                    </a>
+                <?php } ?>
 
                 <a class="nav-link with-icon<?php echo str_starts_with($relativePath, '/home/autores') ? ' is-active' : ''; ?>" href="<?php echo $url_alias; ?>/home/autores">
                     <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

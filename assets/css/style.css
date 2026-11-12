@@ -948,3 +948,56 @@ html[data-theme="dark"] .category-badge {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* --- Autenticação, Perfil no Menu e Alertas de Erro --- */
+.auth-section {
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.auth-subtitle {
+  margin: -1rem 0 1.5rem 0;
+  color: #617383;
+  font-size: 0.95rem;
+}
+
+.notice-error {
+  border-left-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+}
+
+.user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #16655b;
+  background-color: rgba(22, 101, 91, 0.1);
+  border-radius: 999px;
+}
+
+.logout-link {
+  color: #a53d32 !important;
+}
+
+.logout-link:hover {
+  background-color: rgba(220, 38, 38, 0.08) !important;
+  color: #dc2626 !important;
+}
+
+html[data-theme="dark"] .auth-subtitle {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .user-pill {
+  background-color: rgba(45, 212, 191, 0.15);
+  color: #5eead4;
+}
+
+html[data-theme="dark"] .notice-error {
+  background-color: rgba(220, 38, 38, 0.16) !important;
+  color: #fca5a5 !important;
+}

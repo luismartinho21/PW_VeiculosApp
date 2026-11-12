@@ -1,22 +1,34 @@
 <?php
 $pageTitle = 'Veículos | Gestão de Veículos';
 require 'app/views/layout/header.php';
+$isLoggedIn = !empty($_SESSION['user']);
 ?>
 <section class="page-heading">
   <div>
     <p class="eyebrow">Catálogo</p>
     <h1>Lista de Veículos</h1>
   </div>
-  <a class="button with-icon" href="<?php echo $url_alias; ?>/veiculo/create">
-    <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M5 12h14"/>
-      <path d="M12 5v14"/>
-    </svg>
-    <span>Adicionar veículo</span>
-  </a>
+  <?php if ($isLoggedIn) { ?>
+    <a class="button with-icon" href="<?php echo $url_alias; ?>/veiculo/create">
+      <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14"/>
+        <path d="M12 5v14"/>
+      </svg>
+      <span>Adicionar veículo</span>
+    </a>
+  <?php } else { ?>
+    <a class="button button-secondary with-icon" href="<?php echo $url_alias; ?>/auth/login">
+      <span>Inicia sessão para gerir veículos</span>
+    </a>
+  <?php } ?>
 </section>
 
 <?php
+if (!empty($_SESSION['flash_notice'])) {
+  echo '<p class="notice" role="status">' . htmlspecialchars($_SESSION['flash_notice']) . '</p>';
+  unset($_SESSION['flash_notice']);
+}
+
 if (isset($data['info']) && isset($data['type'])) {
   $type = $data['type'];
   switch ($type) {
@@ -88,7 +100,6 @@ if (isset($data['info']) && isset($data['type'])) {
       );
       $categoriaValue = mb_strtolower($veiculo['categoria'], 'UTF-8');
 
-      // Define o tema visual do cartão conforme a categoria
       $catTheme = 'default';
       if (str_contains($categoriaValue, 'terrestre')) {
         $catTheme = 'terrestre';
@@ -143,22 +154,24 @@ if (isset($data['info']) && isset($data['type'])) {
             <span>Detalhes</span>
           </a>
 
-          <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/update/<?php echo $veiculo['id']; ?>">
-            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
-              <path d="m15 5 4 4"/>
-            </svg>
-            <span>Editar</span>
-          </a>
+          <?php if ($isLoggedIn) { ?>
+            <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/update/<?php echo $veiculo['id']; ?>">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                <path d="m15 5 4 4"/>
+              </svg>
+              <span>Editar</span>
+            </a>
 
-          <a class="action-link delete-link with-icon" href="<?php echo $url_alias; ?>/veiculo/delete/<?php echo $veiculo['id']; ?>" data-confirm="Tens a certeza de que pretendes eliminar este veículo?">
-            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 6h18"/>
-              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-            </svg>
-            <span>Eliminar</span>
-          </a>
+            <a class="action-link delete-link with-icon" href="<?php echo $url_alias; ?>/veiculo/delete/<?php echo $veiculo['id']; ?>" data-confirm="Tens a certeza de que pretendes eliminar este veículo?">
+              <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 6h18"/>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+              </svg>
+              <span>Eliminar</span>
+            </a>
+          <?php } ?>
         </div>
       </li>
     <?php } ?>

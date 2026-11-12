@@ -81,3 +81,16 @@ INSERT INTO veiculos (marca, pais_origem, ano_fundacao, categoria_id) VALUES
 ('Sunseeker', 'Reino Unido', 1969, 3),
 ('Princess Yachts', 'Reino Unido', 1965, 3),
 ('Ferretti Yachts', 'Itália', 1968, 3);
+
+USE vehiclesdb;
+
+CREATE TABLE IF NOT EXISTS utilizadores (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT IGNORE INTO utilizadores (nome, email, password_hash) VALUES
+('Administrador ECGM', 'admin@ecgm.pt', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
