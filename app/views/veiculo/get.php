@@ -1,11 +1,17 @@
 <?php
 $pageTitle = 'Detalhes do veículo | Gestão de Veículos';
 require 'app/views/layout/header.php';
+
 if (empty($data['veiculos']) || count($data['veiculos']) == 0) {
 ?>
   <section class="empty-state">
     <h1>O veículo não existe na nossa base de dados.</h1>
-    <a href="<?php echo $url_alias; ?>/veiculo">Voltar à lista</a>
+    <a class="back-arrow-btn" href="<?php echo $url_alias; ?>/veiculo" aria-label="Voltar à lista" title="Voltar à lista">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m12 19-7-7 7-7"/>
+        <path d="M19 12H5"/>
+      </svg>
+    </a>
   </section>
 <?php
 } else {
@@ -28,5 +34,12 @@ if (empty($data['veiculos']) || count($data['veiculos']) == 0) {
 <?php
 }
 ?>
-<p class="back-link"><a href="<?php echo $url_alias; ?>/veiculo">Voltar à lista</a></p>
+<p class="back-link">
+  <a class="back-arrow-btn" href="<?php echo $url_alias; ?>/veiculo" aria-label="Voltar à lista" title="Voltar à lista">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m12 19-7-7 7-7"/>
+      <path d="M19 12H5"/>
+    </svg>
+  </a>
+</p>
 <?php require 'app/views/layout/footer.php'; ?>

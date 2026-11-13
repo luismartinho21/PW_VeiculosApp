@@ -67,9 +67,7 @@ $loggedUser = $_SESSION['user'] ?? null;
                         </svg>
                         <span>Adicionar</span>
                     </a>
-                <?php } ?>
 
-                <?php if ($loggedUser) { ?>
                     <span class="user-pill" title="<?php echo htmlspecialchars($loggedUser['email']); ?>">
                         <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
@@ -77,6 +75,7 @@ $loggedUser = $_SESSION['user'] ?? null;
                         </svg>
                         <span><?php echo htmlspecialchars($loggedUser['nome']); ?></span>
                     </span>
+
                     <a class="nav-link logout-link with-icon" href="<?php echo $url_alias; ?>/auth/logout">
                         <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -95,16 +94,6 @@ $loggedUser = $_SESSION['user'] ?? null;
                         <span>Entrar</span>
                     </a>
                 <?php } ?>
-
-                <a class="nav-link with-icon<?php echo str_starts_with($relativePath, '/home/autores') ? ' is-active' : ''; ?>" href="<?php echo $url_alias; ?>/home/autores">
-                    <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    <span>Autores</span>
-                </a>
 
                 <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar modo escuro" title="Alternar tema Claro/Escuro">
                     <svg class="ui-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

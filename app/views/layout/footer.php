@@ -1,7 +1,7 @@
 </main>
     <footer class="site-footer">
         <div class="container">
-            <p>© 2026 - Projeto Programação Web (IPVC - ESTG)</p>
+            <p>© 2026 - Projeto Programação Web (IPVC - ESTG) <span aria-hidden="true">·</span> <a class="footer-link" href="<?php echo $url_alias; ?>/home/autores">Autores</a></p>
         </div>
     </footer>
 

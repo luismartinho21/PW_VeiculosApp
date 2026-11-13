@@ -174,20 +174,16 @@ if (isset($data['info']) && isset($data['type'])) {
         </div>
 
         <div class="vehicle-card-content">
-          <h2><?php echo htmlspecialchars($veiculo['marca']); ?></h2>
+          <h2>
+            <a class="card-main-link" href="<?php echo $url_alias; ?>/veiculo/get/<?php echo $veiculo['id']; ?>">
+              <?php echo htmlspecialchars($veiculo['marca']); ?>
+            </a>
+          </h2>
           <p><?php echo htmlspecialchars($veiculo['pais_origem']); ?> <span aria-hidden="true">·</span> <?php echo htmlspecialchars($veiculo['ano_fundacao']); ?></p>
         </div>
 
-        <div class="card-actions">
-          <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/get/<?php echo $veiculo['id']; ?>">
-            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span>Detalhes</span>
-          </a>
-
-          <?php if ($isLoggedIn) { ?>
+        <?php if ($isLoggedIn) { ?>
+          <div class="card-actions">
             <a class="action-link with-icon" href="<?php echo $url_alias; ?>/veiculo/update/<?php echo $veiculo['id']; ?>">
               <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
@@ -204,8 +200,8 @@ if (isset($data['info']) && isset($data['type'])) {
               </svg>
               <span>Eliminar</span>
             </a>
-          <?php } ?>
-        </div>
+          </div>
+        <?php } ?>
       </li>
     <?php } ?>
   </ul>
