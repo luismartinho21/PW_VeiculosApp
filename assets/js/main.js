@@ -174,17 +174,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 6. Pesquisa por texto livre + Filtro por categoria
+  // 6. Pesquisa por texto livre + Filtro por categoria + Favoritos
   var searchInput = document.querySelector('#search-veiculos');
   var categorySelect = document.querySelector('#filter-categoria');
+  var favFilterBtn = document.querySelector('#filter-favorites');
   var clearBtn = document.querySelector('#clear-filters');
   var resetEmptyBtn = document.querySelector('#reset-empty-filters');
   var vehicleGrid = document.querySelector('#vehicle-grid');
   var noResultsMsg = document.querySelector('#no-results-message');
   var resultsCounter = document.querySelector('#results-counter');
+  var onlyFavorites = false;
 
   if (searchInput && categorySelect && vehicleGrid) {
     var cards = Array.from(vehicleGrid.querySelectorAll('.vehicle-card'));
+    var baseUrl = vehicleGrid.getAttribute('data-base-url') || '';
 
     function normalizeText(text) {
       return (text || '')
@@ -202,11 +205,13 @@ document.addEventListener('DOMContentLoaded', function () {
       cards.forEach(function (card) {
         var cardSearch = normalizeText(card.getAttribute('data-search'));
         var cardCategory = normalizeText(card.getAttribute('data-categoria'));
+        var isFavorited = card.getAttribute('data-favorited') === '1';
 
         var matchesSearch = !query || cardSearch.indexOf(query) !== -1;
         var matchesCategory = !selectedCategory || cardCategory === selectedCategory;
+        var matchesFavorite = !onlyFavorites || isFavorited;
 
-        if (matchesSearch && matchesCategory) {
+        if (matchesSearch && matchesCategory && matchesFavorite) {
           card.hidden = false;
           visibleCount++;
         } else {
@@ -214,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
 
-      var hasActiveFilters = Boolean(query || selectedCategory);
+      var hasActiveFilters = Boolean(query || selectedCategory || onlyFavorites);
       if (clearBtn) {
         clearBtn.hidden = !hasActiveFilters;
       }
@@ -233,6 +238,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetFilters() {
       searchInput.value = '';
       categorySelect.value = '';
+      onlyFavorites = false;
+      if (favFilterBtn) {
+        favFilterBtn.classList.remove('is-active');
+        favFilterBtn.setAttribute('aria-pressed', 'false');
+      }
       filterVehicles();
       searchInput.focus();
     }
@@ -240,11 +250,52 @@ document.addEventListener('DOMContentLoaded', function () {
     searchInput.addEventListener('input', filterVehicles);
     categorySelect.addEventListener('change', filterVehicles);
 
+    if (favFilterBtn) {
+      favFilterBtn.addEventListener('click', function () {
+        onlyFavorites = !onlyFavorites;
+        favFilterBtn.classList.toggle('is-active', onlyFavorites);
+        favFilterBtn.setAttribute('aria-pressed', String(onlyFavorites));
+        filterVehicles();
+      });
+    }
+
     if (clearBtn) {
       clearBtn.addEventListener('click', resetFilters);
     }
     if (resetEmptyBtn) {
       resetEmptyBtn.addEventListener('click', resetFilters);
     }
+
+    // Toggle de Favorito nos cartões (grava na BD via fetch)
+    vehicleGrid.querySelectorAll('.fav-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.getAttribute('data-id');
+        var card = btn.closest('.vehicle-card');
+        if (!id || !card) return;
+
+        btn.disabled = true;
+        fetch(baseUrl + '/veiculo/favorite/' + id, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data && data.ok) {
+              var active = Boolean(data.favorited);
+              btn.classList.toggle('is-favorited', active);
+              btn.setAttribute('aria-pressed', String(active));
+              btn.setAttribute('aria-label', active ? 'Remover dos favoritos' : 'Adicionar aos favoritos');
+              btn.setAttribute('title', active ? 'Remover dos favoritos' : 'Guardar nos favoritos');
+              card.setAttribute('data-favorited', active ? '1' : '0');
+              if (onlyFavorites) {
+                filterVehicles();
+              }
+            }
+          })
+          .finally(function () {
+            btn.disabled = false;
+          });
+      });
+    });
   }
 });

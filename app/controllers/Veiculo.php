@@ -13,10 +13,22 @@ class Veiculo extends Controller {
     }
   }
 
+  private function getUserFavoritos(): array {
+    if (empty($_SESSION['user']['id'])) {
+      return [];
+    }
+    $Favoritos = $this->model('Favoritos');
+    return $Favoritos::getIdsByUser((int)$_SESSION['user']['id']);
+  }
+
   public function index() {
     $Veiculos = $this->model('Veiculos');
     $data = $Veiculos::getAllVeiculos();
-    $this->view('veiculo/index', ['veiculos' => $data]);
+    $favoritosIds = $this->getUserFavoritos();
+    $this->view('veiculo/index', [
+      'veiculos'     => $data,
+      'favoritosIds' => $favoritosIds
+    ]);
   }
 
   public function get($id = null) {
@@ -29,6 +41,31 @@ class Veiculo extends Controller {
     } else {
       $this->pageNotFound();
     }
+  }
+
+  public function favorite($id = null) {
+    header('Content-Type: application/json; charset=utf-8');
+
+    if (empty($_SESSION['user']['id'])) {
+      http_response_code(401);
+      echo json_encode(['ok' => false, 'error' => 'Não autenticado']);
+      exit;
+    }
+
+    if (!is_numeric($id)) {
+      http_response_code(400);
+      echo json_encode(['ok' => false, 'error' => 'ID inválido']);
+      exit;
+    }
+
+    $Favoritos = $this->model('Favoritos');
+    $isFavorito = $Favoritos::toggle((int)$_SESSION['user']['id'], (int)$id);
+
+    echo json_encode([
+      'ok'        => true,
+      'favorited' => $isFavorito
+    ]);
+    exit;
   }
 
   public function create() {
@@ -46,7 +83,12 @@ class Veiculo extends Controller {
       $Veiculos::addVeiculo($newVeiculo);
 
       $data = $Veiculos::getAllVeiculos();
-      $this->view('veiculo/index', ['veiculos' => $data, 'info' => $newVeiculo, 'type' => 'INSERT']);
+      $this->view('veiculo/index', [
+        'veiculos'     => $data,
+        'favoritosIds' => $this->getUserFavoritos(),
+        'info'         => $newVeiculo,
+        'type'         => 'INSERT'
+      ]);
     } else {
       $categorias = $Categorias::getAllCategorias();
       $this->view('veiculo/create', ['categorias' => $categorias]);
@@ -68,7 +110,12 @@ class Veiculo extends Controller {
       $Veiculos::updateVeiculo((int)$id, $updatedData);
 
       $data = $Veiculos::getAllVeiculos();
-      $this->view('veiculo/index', ['veiculos' => $data, 'info' => $updatedData, 'type' => 'UPDATE']);
+      $this->view('veiculo/index', [
+        'veiculos'     => $data,
+        'favoritosIds' => $this->getUserFavoritos(),
+        'info'         => $updatedData,
+        'type'         => 'UPDATE'
+      ]);
     } else {
       $data = $Veiculos::findVeiculoById((int)$id);
       $categorias = $Categorias::getAllCategorias();
@@ -84,7 +131,12 @@ class Veiculo extends Controller {
       $Veiculos::deleteVeiculo((int)$id);
 
       $all = $Veiculos::getAllVeiculos();
-      $this->view('veiculo/index', ['veiculos' => $all, 'info' => $data[0] ?? ['marca' => 'Veículo'], 'type' => 'DELETE']);
+      $this->view('veiculo/index', [
+        'veiculos'     => $all,
+        'favoritosIds' => $this->getUserFavoritos(),
+        'info'         => $data[0] ?? ['marca' => 'Veículo'],
+        'type'         => 'DELETE'
+      ]);
     } else {
       $this->pageNotFound();
     }
