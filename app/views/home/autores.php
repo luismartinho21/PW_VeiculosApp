@@ -4,25 +4,33 @@ require 'app/views/layout/header.php';
 ?>
 <section class="page-heading">
   <div>
-    <p class="eyebrow">Projeto Programação Web</p>
-    <h1>Autores</h1>
-    <p>Elementos da equipa responsável pelo projeto.</p>
+    <p class="eyebrow">Equipa</p>
+    <h1>Autores do Projeto</h1>
   </div>
 </section>
 
-<section class="author-grid" aria-label="Autores do projeto">
+<section class="author-grid">
   <article class="author-card">
     <h2>Eduardo Oliveira</h2>
     <dl>
-      <div><dt>Número de aluno</dt><dd>33137</dd></div>
-      <div><dt>Curso</dt><dd>EXGM</dd></div>
+      <div><dt>Número</dt><dd>A preencher</dd></div>
+      <div><dt>Curso</dt><dd>ECGM</dd></div>
     </dl>
   </article>
+
   <article class="author-card">
-    <h2>Nome do autor</h2>
+    <h2>Luís Martinho</h2>
     <dl>
-      <div><dt>Número de aluno</dt><dd>A preencher</dd></div>
-      <div><dt>Curso</dt><dd>A preencher</dd></div>
+      <div><dt>Número</dt><dd>A preencher</dd></div>
+      <div><dt>Curso</dt><dd>ECGM</dd></div>
+    </dl>
+  </article>
+
+  <article class="author-card">
+    <h2>Laurindo Gonçalo</h2>
+    <dl>
+      <div><dt>Número</dt><dd>A preencher</dd></div>
+      <div><dt>Curso</dt><dd>ECGM</dd></div>
     </dl>
   </article>
 </section>

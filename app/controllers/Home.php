@@ -2,9 +2,10 @@
 use app\core\Controller;
 
 class Home extends Controller {
-  // Invocação da view index.php de /home
   public function index() {
-    $this->view('home/index');
+    $Veiculos = $this->model('Veiculos');
+    $stats = $Veiculos::getStats();
+    $this->view('home/index', ['stats' => $stats]);
   }
 
   public function autores() {
