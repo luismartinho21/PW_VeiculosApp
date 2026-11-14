@@ -1,28 +1,33 @@
-# VehiclesApp - Aplicação Web em PHP [POO + MVC]
+# Gestão de Veículos (`PW_VeiculosApp`)
 
-Trabalho Prático #1 de **Programação Web** (3º Ano - 1º Semestre)  
-**Curso:** Engenharia de Computação Gráfica e Multimédia (ECGM) - IPVC
+Aplicação web desenvolvida em **PHP nativo (arquitetura MVC)** e **MySQL** para gestão, pesquisa e catalogação histórica de marcas de veículos terrestres, marítimos e aéreas.
 
-## Descrição do Projeto
-Aplicação web informativa sobre marcas e veículos motorizados de três meios fundamentais: **Terrestre**, **Aéreo** e **Marítimo**.
-O projeto foi desenvolvido segundo a arquitetura **Model-View-Controller (MVC)** em PHP com **Programação Orientada a Objetos (POO)** e ligação a **MySQL** via driver **MySQLi**.
+Projeto desenvolvido no âmbito da unidade curricular de **Programação Web** — Curso de **ECGM** (IPVC - ESTG).
 
-## Autores do Projeto
-- **Luís Martinho** ([@luismartinho21](https://github.com/luismartinho21) &bull; [lumar.email](https://lumar.email))
-- **Eduardo Oliveira** ([@eduoliveira31](https://github.com/eduoliveira31))
-- **Gonçalo Laurindo** ([@laurindogoncalo](https://github.com/laurindogoncalo))
+---
 
-*Curso de Engenharia de Computação Gráfica e Multimédia (ECGM) - IPVC*
+## Funcionalidades Principais
 
-## Funcionalidades
-- CRUD completo (Create, Read, Update, Delete) de veículos motorizados;
-- Associação relacional entre veículos e as suas categorias (Terrestre, Aéreo, Marítimo);
-- Front Controller com encaminhamento dinâmico de URLs através de `.htaccess` e classe `App`;
-- Separação em camadas de responsabilidade: Models, Views, Controllers e Core.
+* **Catálogo Interativo:** Visualização em grelha responsiva com temas visuais por categoria (*Terrestre*, *Marítimo* e *Aéreo*) e cartões totalmente clicáveis para consulta de detalhes.
+* **Dashboard de Estatísticas na Página Inicial:** Resumo dinâmico com total de marcas registadas, contagem por categoria, marca mais antiga do catálogo e atalhos diretos que aplicam pré-filtros no catálogo via URL.
+* **Pesquisa e Filtragem em Tempo Real:** Pesquisa instantânea sem acentos por marca, país ou ano de fundação, combinada com filtro por categoria e filtro de favoritos.
+* **Autenticação e Controlo de Acessos:** Registo e início de sessão seguros (`password_hash` / `password_verify` e gestão via `$_SESSION`), protegendo as operações de criação, edição e eliminação de veículos.
+* **Sistema de Favoritos por Utilizador:** Gravação assíncrona (`Fetch API` / JSON) na tabela associativa `favoritos`, permitindo marcar e filtrar os veículos favoritos de cada utilizador autenticado.
+* **Interface Moderna e Acessível:** Tema Claro / Escuro (*Dark Mode*) persistente em `localStorage`, modal de confirmação personalizado para eliminação, alertas (*toasts*) automáticos e validação de formulários no cliente.
 
-## Configuração do Ambiente Local
-1. Colocar o projeto na pasta do servidor web (ex: `C:/xampp/htdocs/PW/vehiclesapp`);
-2. Iniciar os serviços **Apache** e **MySQL** no XAMPP;
-3. Importar a base de dados localizada em `sql/vehiclesdb.sql`;
-4. Aceder no browser a:
-   `http://localhost/PW/vehiclesapp/`
+---
+
+## Tecnologias e Links Úteis
+
+* **Servidor Local:** [XAMPP (Apache + MariaDB/MySQL + PHP 8+)](https://www.apachefriends.org/)
+* **Linguagem Backend:** [PHP 8+ (arquitetura MVC própria com Front Controller e Prepared Statements)](https://www.php.net/docs.php)
+* **Base de Dados:** [MySQL / MariaDB](https://dev.mysql.com/doc/) gerida via [phpMyAdmin](http://localhost/phpmyadmin)
+* **Frontend:** HTML5 semântico, CSS3 (Variáveis CSS, Grid, Flexbox) e JavaScript ES6+ (`Fetch API`)
+
+---
+
+## Instalação e Configuração Local (XAMPP)
+
+1. **Clonar ou colocar o projeto** dentro da pasta `htdocs` do XAMPP:
+   ```text
+   C:\xampp\htdocs\PW_VeiculosApp
